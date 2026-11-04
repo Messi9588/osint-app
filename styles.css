@@ -14,8 +14,13 @@ main{padding:10px 14px;display:grid;gap:10px;grid-template-columns:repeat(auto-f
 .card:active{border-color:var(--g)}.card h3{margin:0 0 4px;font-size:15px;color:var(--g);word-break:break-all}
 .card p,.card .desc{margin:0 0 8px;font-size:13px;line-height:1.4}.m{font-size:11px;color:var(--dim);display:flex;gap:10px;flex-wrap:wrap}
 .arch{color:var(--warn)}.note{color:var(--dim);font-size:11px;padding:0 14px 24px}
-#sheet{position:fixed;inset:0;z-index:5}.bd{position:absolute;inset:0;background:#000a}
-.panel{position:absolute;left:0;right:0;bottom:0;max-height:85vh;overflow:auto;background:var(--card);border-top:2px solid var(--g);border-radius:16px 16px 0 0;padding:16px 16px calc(20px + env(safe-area-inset-bottom));max-width:720px;margin:auto}
+#sheet{position:fixed;inset:0;z-index:5}#sheet[hidden]{display:none !important;pointer-events:none !important}
+.bd{position:absolute;inset:0;background:#000a}
+.panel{position:absolute;left:0;right:0;bottom:0;display:flex;flex-direction:column;max-height:90vh;max-height:90dvh;overflow:hidden;background:var(--card);border-top:2px solid var(--g);border-radius:16px 16px 0 0;max-width:720px;margin:auto}
+.sheet-bar{flex:none;display:flex;justify-content:flex-end;align-items:center;position:sticky;top:0;z-index:2;padding:8px 10px 6px;padding-top:max(8px,env(safe-area-inset-top));background:var(--card)}
+.sheet-x{width:44px;height:44px;border:1px solid var(--g);border-radius:12px;background:#050805;color:var(--g);font:inherit;font-size:28px;line-height:1;cursor:pointer}
+.sheet-body{min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:0 16px calc(20px + env(safe-area-inset-bottom))}
+body.sheet-lock{position:fixed;left:0;right:0;width:100%;overflow:hidden}
 .panel h2{margin:0 0 6px;color:var(--g);font-size:17px;word-break:break-all}.panel dl{display:grid;grid-template-columns:90px 1fr;gap:6px;font-size:13px}.panel dt{color:var(--dim)}
 pre{background:#050805;border:1px solid var(--line);padding:10px;border-radius:8px;white-space:pre-wrap;word-break:break-all;font-size:12px;margin:4px 0}
 .row{display:flex;justify-content:space-between;align-items:center;margin-top:12px;color:var(--dim);font-size:12px}
