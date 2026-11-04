@@ -11,7 +11,46 @@
    "license": "MIT",
    "install": "pipx install sherlock-project",
    "usage": "sherlock user123",
-   "archived": false
+   "archived": false,
+   "description": "Checks whether a username is registered on hundreds of social sites. You get the profile links it could confirm.",
+   "inputs": [
+    {
+     "key": "usernames",
+     "label": "Usernames",
+     "type": "usernames",
+     "required": true,
+     "primary": true,
+     "placeholder": "one or more, separated by spaces",
+     "flag": "USERNAMES"
+    },
+    {
+     "key": "site",
+     "label": "Sites",
+     "type": "text",
+     "placeholder": "github, twitter",
+     "flag": "--site",
+     "help": "Limit the check to these site names."
+    },
+    {
+     "key": "timeout",
+     "label": "Timeout (seconds)",
+     "type": "number",
+     "placeholder": "60",
+     "flag": "--timeout"
+    },
+    {
+     "key": "print_found",
+     "label": "Print found only",
+     "type": "bool",
+     "flag": "--print-found"
+    },
+    {
+     "key": "nsfw",
+     "label": "Include NSFW sites",
+     "type": "bool",
+     "flag": "--nsfw"
+    }
+   ]
   },
   {
    "repo": "soxoj/maigret",
@@ -23,7 +62,44 @@
    "license": "MIT",
    "install": "pip3 install maigret",
    "usage": "maigret user123",
-   "archived": false
+   "archived": false,
+   "description": "Builds a dossier for one or more usernames by checking thousands of sites. You get the matching profiles and an optional report.",
+   "inputs": [
+    {
+     "key": "usernames",
+     "label": "Usernames",
+     "type": "usernames",
+     "required": true,
+     "primary": true,
+     "placeholder": "one or more, separated by spaces"
+    },
+    {
+     "key": "tags",
+     "label": "Site tags",
+     "type": "text",
+     "placeholder": "photo, dating",
+     "flag": "--tags"
+    },
+    {
+     "key": "all_sites",
+     "label": "All available sites",
+     "type": "bool",
+     "flag": "-a"
+    },
+    {
+     "key": "html",
+     "label": "HTML report",
+     "type": "bool",
+     "flag": "--html"
+    },
+    {
+     "key": "permute",
+     "label": "Permute name variants",
+     "type": "bool",
+     "flag": "--permute",
+     "help": "Turns two or more words, such as a full name, into likely usernames."
+    }
+   ]
   },
   {
    "repo": "WebBreacher/WhatsMyName",
@@ -35,7 +111,18 @@
    "license": "NOASSERTION",
    "install": "git clone https://github.com/WebBreacher/WhatsMyName",
    "usage": "Use wmn-data.json or whatsmyname.app",
-   "archived": false
+   "archived": false,
+   "description": "A maintained dataset of how to check a username on hundreds of sites. This repo does not scan by itself; clients such as whatsmyname.app use the username against that list.",
+   "inputs": [
+    {
+     "key": "username",
+     "label": "Username",
+     "type": "usernames",
+     "required": true,
+     "primary": true,
+     "placeholder": "username"
+    }
+   ]
   },
   {
    "repo": "iojw/socialscan",
@@ -47,7 +134,32 @@
    "license": "MPL-2.0",
    "install": "pip install socialscan",
    "usage": "socialscan user123 user@example.com",
-   "archived": false
+   "archived": false,
+   "description": "Checks whether usernames or email addresses are still available on major platforms. You get which ones are taken and which are free.",
+   "inputs": [
+    {
+     "key": "queries",
+     "label": "Usernames or emails",
+     "type": "text",
+     "required": true,
+     "primary": true,
+     "placeholder": "user123 user@example.com",
+     "help": "Space-separated. Each item can be a username or an email."
+    },
+    {
+     "key": "platforms",
+     "label": "Platforms",
+     "type": "text",
+     "placeholder": "github, instagram",
+     "flag": "-p"
+    },
+    {
+     "key": "available_only",
+     "label": "Available only",
+     "type": "bool",
+     "flag": "-a"
+    }
+   ]
   },
   {
    "repo": "Greenwolf/social_mapper",
@@ -59,7 +171,79 @@
    "license": "GPL-3.0",
    "install": "git clone https://github.com/Greenwolf/social_mapper",
    "usage": "See README (needs Firefox + face_recognition)",
-   "archived": false
+   "archived": false,
+   "description": "Matches faces from a company name, a CSV, or a folder of images to profiles on the social sites you pick. You get a report of likely profile matches.",
+   "inputs": [
+    {
+     "key": "format",
+     "label": "Input format",
+     "type": "select",
+     "required": true,
+     "flag": "-f",
+     "options": [
+      "name",
+      "company",
+      "csv",
+      "imagefolder",
+      "socialmapper"
+     ]
+    },
+    {
+     "key": "mode",
+     "label": "Mode",
+     "type": "select",
+     "required": true,
+     "flag": "-m",
+     "options": [
+      "fast",
+      "accurate"
+     ]
+    },
+    {
+     "key": "sites",
+     "label": "Sites",
+     "type": "text",
+     "required": true,
+     "placeholder": "facebook, twitter or all",
+     "help": "At least one of facebook, twitter, instagram, linkedin, googleplus, vkontakte, weibo, douban, or all."
+    },
+    {
+     "key": "input",
+     "label": "Name or company",
+     "type": "text",
+     "placeholder": "company or person name",
+     "flag": "-i",
+     "oneOf": "target",
+     "primary": true
+    },
+    {
+     "key": "file",
+     "label": "CSV, images, or resume file",
+     "type": "file",
+     "flag": "-i",
+     "oneOf": "target",
+     "accept": "image/*,.csv,.html,text/csv",
+     "primary": true
+    },
+    {
+     "key": "threshold",
+     "label": "Match threshold",
+     "type": "select",
+     "flag": "-t",
+     "options": [
+      "loose",
+      "standard",
+      "strict",
+      "superstrict"
+     ]
+    },
+    {
+     "key": "company_id",
+     "label": "LinkedIn company ID",
+     "type": "text",
+     "flag": "--companyid"
+    }
+   ]
   },
   {
    "repo": "megadose/holehe",
@@ -71,7 +255,37 @@
    "license": "GPL-3.0",
    "install": "pip3 install holehe",
    "usage": "holehe test@gmail.com",
-   "archived": false
+   "archived": false,
+   "description": "Checks whether an email address is registered on more than 120 websites. You get the list of sites where an account exists.",
+   "inputs": [
+    {
+     "key": "email",
+     "label": "Email",
+     "type": "email",
+     "required": true,
+     "primary": true,
+     "placeholder": "test@gmail.com"
+    },
+    {
+     "key": "only_used",
+     "label": "Only sites with an account",
+     "type": "bool",
+     "flag": "--only-used"
+    },
+    {
+     "key": "timeout",
+     "label": "Timeout (seconds)",
+     "type": "number",
+     "placeholder": "10",
+     "flag": "-T"
+    },
+    {
+     "key": "csv",
+     "label": "CSV output",
+     "type": "bool",
+     "flag": "-C"
+    }
+   ]
   },
   {
    "repo": "laramies/theHarvester",
@@ -83,7 +297,35 @@
    "license": "GPL-2.0",
    "install": "git clone https://github.com/laramies/theHarvester && uv sync",
    "usage": "theHarvester -d example.com -b duckduckgo",
-   "archived": false
+   "archived": false,
+   "description": "Collects public hostnames, emails, IPs, and URLs for a domain from the sources you choose. You get those discovered names and addresses.",
+   "inputs": [
+    {
+     "key": "domain",
+     "label": "Domain",
+     "type": "domain",
+     "required": true,
+     "primary": true,
+     "placeholder": "example.com",
+     "flag": "-d"
+    },
+    {
+     "key": "sources",
+     "label": "Sources",
+     "type": "text",
+     "placeholder": "crtsh, certspotter or emails, urls",
+     "flag": "-b",
+     "help": "Comma-separated source names or capability selectors such as subdomains, emails, ips, urls."
+    },
+    {
+     "key": "limit",
+     "label": "Limit",
+     "type": "number",
+     "placeholder": "100",
+     "flag": "-l",
+     "help": "Per-source result cap. 0 removes the local cap."
+    }
+   ]
   },
   {
    "repo": "khast3x/h8mail",
@@ -95,7 +337,33 @@
    "license": "NOASSERTION",
    "install": "pip3 install h8mail",
    "usage": "h8mail -t target@example.com",
-   "archived": false
+   "archived": false,
+   "description": "Looks up emails in breach data. You get the leak hits it finds for those addresses.",
+   "inputs": [
+    {
+     "key": "targets",
+     "label": "Emails",
+     "type": "emails",
+     "required": true,
+     "primary": true,
+     "placeholder": "target@example.com",
+     "flag": "-t"
+    },
+    {
+     "key": "urls",
+     "label": "Pages to scan for emails",
+     "type": "text",
+     "placeholder": "https://example.com",
+     "flag": "-u"
+    },
+    {
+     "key": "query",
+     "label": "Custom query",
+     "type": "text",
+     "placeholder": "username, domain, or hash",
+     "flag": "-q"
+    }
+   ]
   },
   {
    "repo": "alpkeskin/mosint",
@@ -107,7 +375,18 @@
    "license": "MIT",
    "install": "go install -v github.com/alpkeskin/mosint/v3/cmd/mosint@latest",
    "usage": "mosint example@email.com",
-   "archived": false
+   "archived": false,
+   "description": "Runs breach, social, and DNS checks for one email address. You get a combined report on that address.",
+   "inputs": [
+    {
+     "key": "email",
+     "label": "Email",
+     "type": "email",
+     "required": true,
+     "primary": true,
+     "placeholder": "example@email.com"
+    }
+   ]
   },
   {
    "repo": "martinvigo/email2phonenumber",
@@ -119,7 +398,51 @@
    "license": "MIT",
    "install": "git clone https://github.com/martinvigo/email2phonenumber",
    "usage": "python3 email2phonenumber.py scrape -e target@gmail.com",
-   "archived": false
+   "archived": false,
+   "description": "Tries to recover phone-number digits linked to an email from public password-reset pages, or builds a number list from a mask. You get the digits or the generated numbers.",
+   "inputs": [
+    {
+     "key": "command",
+     "label": "Command",
+     "type": "select",
+     "required": true,
+     "options": [
+      "scrape",
+      "generate",
+      "bruteforce"
+     ]
+    },
+    {
+     "key": "email",
+     "label": "Email",
+     "type": "email",
+     "required": true,
+     "primary": true,
+     "placeholder": "target@email.com",
+     "flag": "-e",
+     "when": {
+      "command": [
+       "scrape",
+       "bruteforce"
+      ]
+     }
+    },
+    {
+     "key": "mask",
+     "label": "Phone mask",
+     "type": "text",
+     "required": true,
+     "placeholder": "555XXX1234",
+     "flag": "-m",
+     "when": {
+      "command": [
+       "generate",
+       "bruteforce"
+      ]
+     },
+     "primary": true
+    }
+   ]
   },
   {
    "repo": "mxrch/GHunt",
@@ -131,7 +454,35 @@
    "license": "NOASSERTION",
    "install": "pipx install ghunt",
    "usage": "ghunt login; ghunt email user@gmail.com",
-   "archived": false
+   "archived": false,
+   "description": "Looks up public Google account data from an email, a Gaia ID, a Drive file, or a Wi-Fi BSSID. You get the profile and linked Google data that module can see.",
+   "inputs": [
+    {
+     "key": "module",
+     "label": "Module",
+     "type": "select",
+     "required": true,
+     "options": [
+      "email",
+      "gaia",
+      "drive",
+      "geolocate"
+     ]
+    },
+    {
+     "key": "query",
+     "label": "Query",
+     "type": "text",
+     "required": true,
+     "primary": true,
+     "placeholder": "email, Gaia ID, Drive URL, or BSSID",
+     "validateWhen": {
+      "module": {
+       "email": "email"
+      }
+     }
+    }
+   ]
   },
   {
    "repo": "D4Vinci/Cr3dOv3r",
@@ -143,7 +494,30 @@
    "license": "MIT",
    "install": "git clone https://github.com/D4Vinci/Cr3dOv3r && pip3 install -r requirements.txt",
    "usage": "python3 Cr3d0v3r.py user@example.com",
-   "archived": false
+   "archived": false,
+   "description": "Checks an email or username against known credential leaks. You get whether leaked passwords were found for it.",
+   "inputs": [
+    {
+     "key": "account",
+     "label": "Email or username",
+     "type": "text",
+     "required": true,
+     "primary": true,
+     "placeholder": "user@example.com"
+    },
+    {
+     "key": "skip_leaks",
+     "label": "Skip leak lookup",
+     "type": "bool",
+     "flag": "-p"
+    },
+    {
+     "key": "skip_plaintext",
+     "label": "Skip plaintext passwords",
+     "type": "bool",
+     "flag": "-np"
+    }
+   ]
   },
   {
    "repo": "sundowndev/phoneinfoga",
@@ -155,19 +529,72 @@
    "license": "GPL-3.0",
    "install": "Download release binary or docker pull sundowndev/phoneinfoga",
    "usage": "phoneinfoga scan -n +14155552671",
-   "archived": false
+   "archived": false,
+   "description": "Scans a phone number and returns its country, carrier, and line type, plus any public footprint the configured scanners find.",
+   "inputs": [
+    {
+     "key": "command",
+     "label": "Command",
+     "type": "select",
+     "required": true,
+     "options": [
+      "scan",
+      "recon"
+     ]
+    },
+    {
+     "key": "phone",
+     "label": "Phone (E.164)",
+     "type": "phone",
+     "required": true,
+     "primary": true,
+     "placeholder": "+14155552671",
+     "flag": "-n"
+    },
+    {
+     "key": "scanner",
+     "label": "Scanner",
+     "type": "text",
+     "placeholder": "footprints",
+     "flag": "-s",
+     "when": {
+      "command": [
+       "scan"
+      ]
+     }
+    }
+   ]
   },
   {
    "repo": "megadose/ignorant",
    "category": "Phone",
-   "purpose": "Check if a phone number is used on sites (Instagram, Snapchat\u2026)",
+   "purpose": "Check if a phone number is used on sites (Instagram, Snapchat…)",
    "stars": 2143,
    "updated": "2024-07-27",
    "language": "Python",
    "license": "GPL-3.0",
    "install": "pip3 install ignorant",
    "usage": "ignorant 33 644637111",
-   "archived": false
+   "archived": false,
+   "description": "Checks whether a phone number is used on sites such as Instagram and Snapchat. You get the sites where that number appears.",
+   "inputs": [
+    {
+     "key": "country_code",
+     "label": "Country code",
+     "type": "digits",
+     "required": true,
+     "primary": true,
+     "placeholder": "33"
+    },
+    {
+     "key": "phone",
+     "label": "National number",
+     "type": "digits",
+     "required": true,
+     "primary": true,
+     "placeholder": "644637111"
+    }
+   ]
   },
   {
    "repo": "owasp-amass/amass",
@@ -179,7 +606,51 @@
    "license": "NOASSERTION",
    "install": "go install -v github.com/owasp-amass/amass/v4/...@master",
    "usage": "amass enum -d example.com",
-   "archived": false
+   "archived": false,
+   "description": "Maps a domain's publicly visible names. You get the subdomains and related names the enum command discovers.",
+   "inputs": [
+    {
+     "key": "domain",
+     "label": "Domain",
+     "type": "domain",
+     "required": true,
+     "primary": true,
+     "placeholder": "example.com",
+     "flag": "-d"
+    },
+    {
+     "key": "passive",
+     "label": "Passive only",
+     "type": "bool",
+     "flag": "--passive"
+    },
+    {
+     "key": "active",
+     "label": "Active recon",
+     "type": "bool",
+     "flag": "-active"
+    },
+    {
+     "key": "brute",
+     "label": "Brute force names",
+     "type": "bool",
+     "flag": "-brute"
+    },
+    {
+     "key": "ports",
+     "label": "Ports",
+     "type": "text",
+     "placeholder": "80,443,8080",
+     "flag": "-p"
+    },
+    {
+     "key": "timeout",
+     "label": "Timeout (minutes)",
+     "type": "number",
+     "placeholder": "30",
+     "flag": "-timeout"
+    }
+   ]
   },
   {
    "repo": "projectdiscovery/subfinder",
@@ -191,7 +662,32 @@
    "license": "MIT",
    "install": "go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest",
    "usage": "subfinder -d example.com",
-   "archived": false
+   "archived": false,
+   "description": "Finds subdomains for a domain from passive sources. You get the hostname list.",
+   "inputs": [
+    {
+     "key": "domain",
+     "label": "Domain",
+     "type": "domain",
+     "required": true,
+     "primary": true,
+     "placeholder": "example.com",
+     "flag": "-d"
+    },
+    {
+     "key": "sources",
+     "label": "Sources",
+     "type": "text",
+     "placeholder": "crtsh, github",
+     "flag": "-s"
+    },
+    {
+     "key": "all_sources",
+     "label": "Use all sources",
+     "type": "bool",
+     "flag": "-all"
+    }
+   ]
   },
   {
    "repo": "aboul3la/Sublist3r",
@@ -203,7 +699,46 @@
    "license": "GPL-2.0",
    "install": "git clone https://github.com/aboul3la/Sublist3r && pip install -r requirements.txt",
    "usage": "python sublist3r.py -d example.com",
-   "archived": false
+   "archived": false,
+   "description": "Enumerates subdomains with search engines and an optional brute-force step. You get the subdomain names it collects.",
+   "inputs": [
+    {
+     "key": "domain",
+     "label": "Domain",
+     "type": "domain",
+     "required": true,
+     "primary": true,
+     "placeholder": "example.com",
+     "flag": "-d"
+    },
+    {
+     "key": "engines",
+     "label": "Search engines",
+     "type": "text",
+     "placeholder": "google, bing, yahoo",
+     "flag": "-e"
+    },
+    {
+     "key": "bruteforce",
+     "label": "Enable brute force",
+     "type": "bool",
+     "flag": "-b"
+    },
+    {
+     "key": "threads",
+     "label": "Brute-force threads",
+     "type": "number",
+     "placeholder": "40",
+     "flag": "-t"
+    },
+    {
+     "key": "ports",
+     "label": "Ports to scan",
+     "type": "text",
+     "placeholder": "80,443",
+     "flag": "-p"
+    }
+   ]
   },
   {
    "repo": "blechschmidt/massdns",
@@ -215,7 +750,34 @@
    "license": "GPL-3.0",
    "install": "git clone https://github.com/blechschmidt/massdns && cd massdns && make",
    "usage": "./bin/massdns -r lists/resolvers.txt -t A domains.txt",
-   "archived": false
+   "archived": false,
+   "description": "Resolves a large list of DNS names. You get the records of the type you ask for.",
+   "inputs": [
+    {
+     "key": "domains",
+     "label": "Domain list",
+     "type": "text",
+     "required": true,
+     "primary": true,
+     "placeholder": "one name per line",
+     "help": "The names to resolve."
+    },
+    {
+     "key": "resolvers",
+     "label": "Resolvers file",
+     "type": "text",
+     "required": true,
+     "placeholder": "lists/resolvers.txt",
+     "flag": "-r"
+    },
+    {
+     "key": "record_type",
+     "label": "Record type",
+     "type": "text",
+     "placeholder": "A",
+     "flag": "-t"
+    }
+   ]
   },
   {
    "repo": "projectdiscovery/dnsx",
@@ -227,7 +789,26 @@
    "license": "MIT",
    "install": "go install -v github.com/projectdiscovery/dnsx/cmd/dnsx@latest",
    "usage": "subfinder -silent -d example.com | dnsx",
-   "archived": false
+   "archived": false,
+   "description": "Resolves domains in bulk. You get the DNS records you select, such as A, MX, or TXT.",
+   "inputs": [
+    {
+     "key": "domain",
+     "label": "Domain",
+     "type": "domain",
+     "required": true,
+     "primary": true,
+     "placeholder": "example.com",
+     "flag": "-d"
+    },
+    {
+     "key": "records",
+     "label": "Record types",
+     "type": "text",
+     "placeholder": "a, aaaa, mx, txt",
+     "help": "Leave blank for the default A lookup."
+    }
+   ]
   },
   {
    "repo": "projectdiscovery/httpx",
@@ -239,7 +820,37 @@
    "license": "MIT",
    "install": "go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest",
    "usage": "cat hosts.txt | httpx -title -tech-detect",
-   "archived": false
+   "archived": false,
+   "description": "Probes hosts over HTTP. You get which ones respond, plus titles, status codes, or technologies if you turn those on.",
+   "inputs": [
+    {
+     "key": "target",
+     "label": "Host or URL",
+     "type": "host",
+     "required": true,
+     "primary": true,
+     "placeholder": "example.com or https://example.com",
+     "flag": "-u"
+    },
+    {
+     "key": "title",
+     "label": "Show page title",
+     "type": "bool",
+     "flag": "-title"
+    },
+    {
+     "key": "tech_detect",
+     "label": "Detect technologies",
+     "type": "bool",
+     "flag": "-td"
+    },
+    {
+     "key": "status_code",
+     "label": "Show status code",
+     "type": "bool",
+     "flag": "-sc"
+    }
+   ]
   },
   {
    "repo": "tomnomnom/assetfinder",
@@ -251,7 +862,24 @@
    "license": "MIT",
    "install": "go install github.com/tomnomnom/assetfinder@latest",
    "usage": "assetfinder --subs-only example.com",
-   "archived": false
+   "archived": false,
+   "description": "Finds domain names related to a domain. You get that name list, optionally limited to subdomains.",
+   "inputs": [
+    {
+     "key": "domain",
+     "label": "Domain",
+     "type": "domain",
+     "required": true,
+     "primary": true,
+     "placeholder": "example.com"
+    },
+    {
+     "key": "subs_only",
+     "label": "Subdomains only",
+     "type": "bool",
+     "flag": "--subs-only"
+    }
+   ]
   },
   {
    "repo": "tomnomnom/waybackurls",
@@ -263,7 +891,18 @@
    "license": "None",
    "install": "go install github.com/tomnomnom/waybackurls@latest",
    "usage": "echo example.com | waybackurls",
-   "archived": false
+   "archived": false,
+   "description": "Pulls URLs the Wayback Machine has stored for a domain. You get that historical URL list.",
+   "inputs": [
+    {
+     "key": "domain",
+     "label": "Domain",
+     "type": "domain",
+     "required": true,
+     "primary": true,
+     "placeholder": "example.com"
+    }
+   ]
   },
   {
    "repo": "lissy93/web-check",
@@ -275,7 +914,18 @@
    "license": "MIT",
    "install": "docker run -p 3000:3000 lissy93/web-check",
    "usage": "Open localhost:3000 or web-check.xyz",
-   "archived": false
+   "archived": false,
+   "description": "Builds a website report for one URL. You get DNS, SSL, header, and technology details in the web-check page.",
+   "inputs": [
+    {
+     "key": "url",
+     "label": "URL",
+     "type": "url",
+     "required": true,
+     "primary": true,
+     "placeholder": "https://example.com"
+    }
+   ]
   },
   {
    "repo": "thewhiteh4t/FinalRecon",
@@ -287,7 +937,51 @@
    "license": "MIT",
    "install": "pip3 install finalrecon",
    "usage": "finalrecon --full --url https://example.com",
-   "archived": false
+   "archived": false,
+   "description": "Runs the recon modules you pick against a URL. You get headers, DNS, subdomains, or a full overview, depending on the module.",
+   "inputs": [
+    {
+     "key": "url",
+     "label": "URL",
+     "type": "url",
+     "required": true,
+     "primary": true,
+     "placeholder": "https://example.com",
+     "flag": "--url"
+    },
+    {
+     "key": "module",
+     "label": "Module",
+     "type": "select",
+     "required": true,
+     "options": [
+      "full",
+      "headers",
+      "sslinfo",
+      "whois",
+      "crawl",
+      "dns",
+      "sub",
+      "dir",
+      "wayback",
+      "ps"
+     ]
+    },
+    {
+     "key": "extensions",
+     "label": "Directory extensions",
+     "type": "text",
+     "placeholder": "txt, php",
+     "flag": "-e"
+    },
+    {
+     "key": "timeout",
+     "label": "Timeout (seconds)",
+     "type": "number",
+     "placeholder": "30",
+     "flag": "-T"
+    }
+   ]
   },
   {
    "repo": "sensepost/gowitness",
@@ -299,7 +993,25 @@
    "license": "GPL-3.0",
    "install": "go install github.com/sensepost/gowitness@latest",
    "usage": "gowitness scan single --url https://example.com",
-   "archived": false
+   "archived": false,
+   "description": "Screenshots a single URL. You get the screenshot and the page data written to its database if you ask for that.",
+   "inputs": [
+    {
+     "key": "url",
+     "label": "URL",
+     "type": "url",
+     "required": true,
+     "primary": true,
+     "placeholder": "https://example.com",
+     "flag": "--url"
+    },
+    {
+     "key": "write_db",
+     "label": "Write to database",
+     "type": "bool",
+     "flag": "--write-db"
+    }
+   ]
   },
   {
    "repo": "michenriksen/aquatone",
@@ -311,7 +1023,25 @@
    "license": "MIT",
    "install": "Download release binary",
    "usage": "cat hosts.txt | aquatone",
-   "archived": true
+   "archived": true,
+   "description": "Opens the web ports of a host list and screenshots them. You get an HTML report of those pages.",
+   "inputs": [
+    {
+     "key": "hosts",
+     "label": "Hosts",
+     "type": "text",
+     "required": true,
+     "primary": true,
+     "placeholder": "one host per line"
+    },
+    {
+     "key": "ports",
+     "label": "Ports",
+     "type": "text",
+     "placeholder": "80,443,8080",
+     "flag": "-ports"
+    }
+   ]
   },
   {
    "repo": "s0md3v/Arjun",
@@ -323,7 +1053,62 @@
    "license": "AGPL-3.0",
    "install": "pipx install arjun",
    "usage": "arjun -u https://example.com/endpoint",
-   "archived": false
+   "archived": false,
+   "description": "Discovers hidden HTTP parameters on a URL. You get the parameter names it finds.",
+   "inputs": [
+    {
+     "key": "url",
+     "label": "URL",
+     "type": "url",
+     "required": true,
+     "primary": true,
+     "placeholder": "https://api.example.com/endpoint",
+     "flag": "-u",
+     "oneOf": "target"
+    },
+    {
+     "key": "import_file",
+     "label": "Target file",
+     "type": "file",
+     "flag": "-i",
+     "oneOf": "target",
+     "accept": ".txt,.xml,.json,text/plain",
+     "primary": true
+    },
+    {
+     "key": "method",
+     "label": "HTTP method",
+     "type": "select",
+     "flag": "-m",
+     "options": [
+      "GET",
+      "POST",
+      "JSON",
+      "XML"
+     ]
+    },
+    {
+     "key": "threads",
+     "label": "Threads",
+     "type": "number",
+     "placeholder": "2",
+     "flag": "-t"
+    },
+    {
+     "key": "delay",
+     "label": "Delay (seconds)",
+     "type": "number",
+     "placeholder": "0",
+     "flag": "-d"
+    },
+    {
+     "key": "timeout",
+     "label": "Timeout (seconds)",
+     "type": "number",
+     "placeholder": "15",
+     "flag": "-T"
+    }
+   ]
   },
   {
    "repo": "Datalux/Osintgram",
@@ -335,7 +1120,27 @@
    "license": "GPL-3.0",
    "install": "git clone https://github.com/Datalux/Osintgram && pip install -r requirements.txt",
    "usage": "python3 main.py <target>",
-   "archived": false
+   "archived": false,
+   "description": "Looks up a public Instagram account, hashtag, or place in a local web app. You get profile, network, and content details, or an answer to a plain-language question.",
+   "inputs": [
+    {
+     "key": "username",
+     "label": "Instagram username",
+     "type": "text",
+     "placeholder": "username",
+     "oneOf": "target",
+     "primary": true
+    },
+    {
+     "key": "question",
+     "label": "Question",
+     "type": "text",
+     "placeholder": "how many followers, and which hashtags",
+     "oneOf": "target",
+     "primary": true,
+     "help": "Optional. In AI mode the username can be empty if you ask about a hashtag or a place."
+    }
+   ]
   },
   {
    "repo": "instaloader/instaloader",
@@ -347,7 +1152,36 @@
    "license": "MIT",
    "install": "pip3 install instaloader",
    "usage": "instaloader profile <username>",
-   "archived": false
+   "archived": false,
+   "description": "Downloads posts and profile media for one or more Instagram usernames. You get the pictures, videos, and their metadata saved locally.",
+   "inputs": [
+    {
+     "key": "profiles",
+     "label": "Profiles",
+     "type": "usernames",
+     "required": true,
+     "primary": true,
+     "placeholder": "one or more usernames"
+    },
+    {
+     "key": "stories",
+     "label": "Include stories",
+     "type": "bool",
+     "flag": "--stories"
+    },
+    {
+     "key": "highlights",
+     "label": "Include highlights",
+     "type": "bool",
+     "flag": "--highlights"
+    },
+    {
+     "key": "fast_update",
+     "label": "Fast update",
+     "type": "bool",
+     "flag": "--fast-update"
+    }
+   ]
   },
   {
    "repo": "althonos/InstaLooter",
@@ -359,7 +1193,42 @@
    "license": "GPL-3.0",
    "install": "pip install instalooter",
    "usage": "instalooter user <username>",
-   "archived": false
+   "archived": false,
+   "description": "Downloads Instagram media for a user, a hashtag, or one post. You get those files in the folder you choose.",
+   "inputs": [
+    {
+     "key": "command",
+     "label": "Command",
+     "type": "select",
+     "required": true,
+     "options": [
+      "user",
+      "hashtag",
+      "post"
+     ]
+    },
+    {
+     "key": "target",
+     "label": "Username, hashtag, or post",
+     "type": "text",
+     "required": true,
+     "primary": true,
+     "placeholder": "instagram or a post URL"
+    },
+    {
+     "key": "number",
+     "label": "How many posts",
+     "type": "number",
+     "placeholder": "20",
+     "flag": "-n"
+    },
+    {
+     "key": "videos",
+     "label": "Include videos",
+     "type": "bool",
+     "flag": "--get-videos"
+    }
+   ]
   },
   {
    "repo": "twintproject/twint",
@@ -371,7 +1240,54 @@
    "license": "MIT",
    "install": "pip3 install twint",
    "usage": "twint -u username",
-   "archived": true
+   "archived": true,
+   "description": "Scrapes public tweets by username or search text. You get the matching tweets. The project is archived and often no longer works against Twitter.",
+   "inputs": [
+    {
+     "key": "username",
+     "label": "Username",
+     "type": "text",
+     "placeholder": "username",
+     "flag": "-u",
+     "oneOf": "who",
+     "primary": true
+    },
+    {
+     "key": "search",
+     "label": "Search text",
+     "type": "text",
+     "placeholder": "pineapple",
+     "flag": "-s",
+     "oneOf": "who",
+     "primary": true
+    },
+    {
+     "key": "since",
+     "label": "Since",
+     "type": "text",
+     "placeholder": "2015-12-20",
+     "flag": "--since"
+    },
+    {
+     "key": "year",
+     "label": "Before year",
+     "type": "number",
+     "placeholder": "2014",
+     "flag": "--year"
+    },
+    {
+     "key": "followers",
+     "label": "List followers",
+     "type": "bool",
+     "flag": "--followers"
+    },
+    {
+     "key": "following",
+     "label": "List following",
+     "type": "bool",
+     "flag": "--following"
+    }
+   ]
   },
   {
    "repo": "JustAnotherArchivist/snscrape",
@@ -383,7 +1299,39 @@
    "license": "GPL-3.0",
    "install": "pip3 install snscrape",
    "usage": "snscrape reddit-user <username>",
-   "archived": false
+   "archived": false,
+   "description": "Scrapes a social site using a named scraper and a query. You get the posts or profile items that scraper returns.",
+   "inputs": [
+    {
+     "key": "scraper",
+     "label": "Scraper",
+     "type": "text",
+     "required": true,
+     "placeholder": "twitter-user",
+     "help": "Examples: twitter-user, twitter-hashtag, twitter-search, reddit-user, reddit-subreddit, reddit-search."
+    },
+    {
+     "key": "query",
+     "label": "Query",
+     "type": "text",
+     "required": true,
+     "primary": true,
+     "placeholder": "textfiles or a hashtag"
+    },
+    {
+     "key": "max_results",
+     "label": "Max results",
+     "type": "number",
+     "placeholder": "100",
+     "flag": "--max-results"
+    },
+    {
+     "key": "jsonl",
+     "label": "JSONL output",
+     "type": "bool",
+     "flag": "--jsonl"
+    }
+   ]
   },
   {
    "repo": "qeeqbox/social-analyzer",
@@ -395,7 +1343,46 @@
    "license": "AGPL-3.0",
    "install": "pip3 install social-analyzer",
    "usage": "social-analyzer --username user123",
-   "archived": false
+   "archived": false,
+   "description": "Searches for a username across many websites. You get the profiles it detects, and page metadata if you ask for it.",
+   "inputs": [
+    {
+     "key": "username",
+     "label": "Usernames",
+     "type": "text",
+     "required": true,
+     "primary": true,
+     "placeholder": "johndoe, janedoe",
+     "flag": "--username"
+    },
+    {
+     "key": "websites",
+     "label": "Websites",
+     "type": "text",
+     "placeholder": "youtube tiktok",
+     "flag": "--websites"
+    },
+    {
+     "key": "type",
+     "label": "Site type",
+     "type": "text",
+     "placeholder": "adult",
+     "flag": "--type"
+    },
+    {
+     "key": "top",
+     "label": "Top sites",
+     "type": "number",
+     "placeholder": "100",
+     "flag": "--top"
+    },
+    {
+     "key": "metadata",
+     "label": "Extract metadata",
+     "type": "bool",
+     "flag": "--metadata"
+    }
+   ]
   },
   {
    "repo": "bellingcat/octosuite",
@@ -407,7 +1394,36 @@
    "license": "MIT",
    "install": "pip install octosuite",
    "usage": "octosuite",
-   "archived": false
+   "archived": false,
+   "description": "Fetches public GitHub data for a user, repository, organization, or search. You get that profile, repo, or search result.",
+   "inputs": [
+    {
+     "key": "command",
+     "label": "Command",
+     "type": "select",
+     "required": true,
+     "options": [
+      "user",
+      "repo",
+      "org",
+      "search"
+     ]
+    },
+    {
+     "key": "name",
+     "label": "Name or search",
+     "type": "text",
+     "required": true,
+     "primary": true,
+     "placeholder": "torvalds or torvalds/linux"
+    },
+    {
+     "key": "json",
+     "label": "JSON output",
+     "type": "bool",
+     "flag": "--json"
+    }
+   ]
   },
   {
    "repo": "thewhiteh4t/seeker",
@@ -419,7 +1435,32 @@
    "license": "MIT",
    "install": "git clone https://github.com/thewhiteh4t/seeker",
    "usage": "python3 seeker.py (authorized testing only)",
-   "archived": false
+   "archived": false,
+   "description": "Starts a local page for an authorized location test. If the person you are allowed to test opens the link, you get the location they share, optionally as a KML file.",
+   "inputs": [
+    {
+     "key": "template",
+     "label": "Template index",
+     "type": "text",
+     "placeholder": "template number",
+     "flag": "-t",
+     "primary": true
+    },
+    {
+     "key": "port",
+     "label": "Port",
+     "type": "number",
+     "placeholder": "8080",
+     "flag": "-p"
+    },
+    {
+     "key": "kml",
+     "label": "KML filename",
+     "type": "text",
+     "placeholder": "locations.kml",
+     "flag": "-k"
+    }
+   ]
   },
   {
    "repo": "GuidoBartoli/sherloq",
@@ -431,7 +1472,18 @@
    "license": "GPL-3.0",
    "install": "git clone https://github.com/GuidoBartoli/sherloq",
    "usage": "See README (Python GUI)",
-   "archived": false
+   "archived": false,
+   "description": "Opens an image in a forensics workbench. You get metadata, noise, and tampering views so you can inspect the file yourself.",
+   "inputs": [
+    {
+     "key": "file",
+     "label": "Image",
+     "type": "file",
+     "required": true,
+     "primary": true,
+     "accept": "image/*"
+    }
+   ]
   },
   {
    "repo": "bellingcat/auto-archiver",
@@ -443,7 +1495,26 @@
    "license": "MIT",
    "install": "pip install auto-archiver",
    "usage": "auto-archiver --config orchestration.yaml",
-   "archived": false
+   "archived": false,
+   "description": "Archives social posts and web pages from URLs or a CSV of URLs. You get saved copies and a status report for each one.",
+   "inputs": [
+    {
+     "key": "urls",
+     "label": "URLs",
+     "type": "text",
+     "placeholder": "one URL per line",
+     "oneOf": "target",
+     "primary": true
+    },
+    {
+     "key": "file",
+     "label": "CSV of URLs",
+     "type": "file",
+     "oneOf": "target",
+     "accept": ".csv,text/csv",
+     "primary": true
+    }
+   ]
   },
   {
    "repo": "exiftool/exiftool",
@@ -455,7 +1526,18 @@
    "license": "GPL-3.0",
    "install": "sudo apt install libimage-exiftool-perl",
    "usage": "exiftool photo.jpg",
-   "archived": false
+   "archived": false,
+   "description": "Reads the metadata stored in a file. You get the tags embedded in it, such as camera, GPS, author, and dates.",
+   "inputs": [
+    {
+     "key": "file",
+     "label": "File",
+     "type": "file",
+     "required": true,
+     "primary": true,
+     "accept": "image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.odt,.ods,.odp,.txt,.rtf,.svg"
+    }
+   ]
   },
   {
    "repo": "laramies/metagoofil",
@@ -467,7 +1549,50 @@
    "license": "GPL-2.0",
    "install": "git clone https://github.com/laramies/metagoofil && pip install -r requirements.txt",
    "usage": "python3 metagoofil.py -d example.com -t pdf -o out",
-   "archived": false
+   "archived": false,
+   "description": "Finds public documents for a domain, or reads a local folder of documents, and extracts their metadata. You get usernames, emails, software paths, and similar details from those files.",
+   "inputs": [
+    {
+     "key": "domain",
+     "label": "Domain",
+     "type": "domain",
+     "placeholder": "example.com",
+     "flag": "-d",
+     "oneOf": "target",
+     "primary": true
+    },
+    {
+     "key": "file",
+     "label": "Local documents",
+     "type": "file",
+     "flag": "-h",
+     "oneOf": "target",
+     "accept": "image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.odt,.ods,.odp,.txt,.rtf,.svg",
+     "primary": true,
+     "help": "Use this instead of a domain to analyze files you already have."
+    },
+    {
+     "key": "filetypes",
+     "label": "File types",
+     "type": "text",
+     "placeholder": "pdf, doc, xls",
+     "flag": "-t"
+    },
+    {
+     "key": "limit",
+     "label": "Search limit",
+     "type": "number",
+     "placeholder": "200",
+     "flag": "-l"
+    },
+    {
+     "key": "download_limit",
+     "label": "Download limit",
+     "type": "number",
+     "placeholder": "50",
+     "flag": "-n"
+    }
+   ]
   },
   {
    "repo": "ElevenPaths/FOCA",
@@ -479,7 +1604,26 @@
    "license": "GPL-3.0",
    "install": "Download release (Windows + SQL Server)",
    "usage": "GUI",
-   "archived": false
+   "archived": false,
+   "description": "A Windows app that finds documents for a domain and reads metadata from those files or from local files you add. You get the extracted metadata and the relationships it builds.",
+   "inputs": [
+    {
+     "key": "domain",
+     "label": "Domain",
+     "type": "domain",
+     "placeholder": "example.com",
+     "oneOf": "target",
+     "primary": true
+    },
+    {
+     "key": "file",
+     "label": "Local file",
+     "type": "file",
+     "oneOf": "target",
+     "accept": "image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.odt,.ods,.odp,.txt,.rtf,.svg",
+     "primary": true
+    }
+   ]
   },
   {
    "repo": "DedSecInside/TorBot",
@@ -491,7 +1635,32 @@
    "license": "NOASSERTION",
    "install": "git clone https://github.com/DedSecInside/TorBot && poetry install",
    "usage": "python run.py -u http://<onion> --depth 2",
-   "archived": false
+   "archived": false,
+   "description": "Crawls an onion or ordinary URL and summarizes the page. You get site information and a crawl tree up to the depth you set.",
+   "inputs": [
+    {
+     "key": "url",
+     "label": "URL",
+     "type": "url",
+     "required": true,
+     "primary": true,
+     "placeholder": "http://example.onion",
+     "flag": "-u"
+    },
+    {
+     "key": "depth",
+     "label": "Depth",
+     "type": "number",
+     "placeholder": "2",
+     "flag": "--depth"
+    },
+    {
+     "key": "info",
+     "label": "Basic site info only",
+     "type": "bool",
+     "flag": "--info"
+    }
+   ]
   },
   {
    "repo": "s-rah/onionscan",
@@ -503,7 +1672,37 @@
    "license": "NOASSERTION",
    "install": "go install github.com/s-rah/onionscan@latest",
    "usage": "onionscan <address>.onion",
-   "archived": false
+   "archived": false,
+   "description": "Checks an onion service for common configuration leaks. You get a risk report, in text or JSON.",
+   "inputs": [
+    {
+     "key": "onion",
+     "label": "Onion address",
+     "type": "onion",
+     "required": true,
+     "primary": true,
+     "placeholder": "example.onion"
+    },
+    {
+     "key": "verbose",
+     "label": "Verbose report",
+     "type": "bool",
+     "flag": "--verbose"
+    },
+    {
+     "key": "json",
+     "label": "JSON report",
+     "type": "bool",
+     "flag": "--jsonReport"
+    },
+    {
+     "key": "tor_proxy",
+     "label": "Tor proxy",
+     "type": "text",
+     "placeholder": "127.0.0.1:9050",
+     "flag": "--torProxyAddress"
+    }
+   ]
   },
   {
    "repo": "MISP/MISP",
@@ -515,7 +1714,18 @@
    "license": "AGPL-3.0",
    "install": "See misp-docker or install scripts",
    "usage": "Web UI",
-   "archived": false
+   "archived": false,
+   "description": "A web platform for storing and sharing threat indicators. You look up an indicator and get the matching events and attributes in your MISP instance.",
+   "inputs": [
+    {
+     "key": "indicator",
+     "label": "Indicator",
+     "type": "text",
+     "required": true,
+     "primary": true,
+     "placeholder": "hash, domain, IP, or email"
+    }
+   ]
   },
   {
    "repo": "OpenCTI-Platform/opencti",
@@ -527,7 +1737,18 @@
    "license": "NOASSERTION",
    "install": "Use the OpenCTI docker-compose repo",
    "usage": "Web UI",
-   "archived": false
+   "archived": false,
+   "description": "A web platform for threat knowledge. You look up an observable and get the linked reports and relationships stored in the instance.",
+   "inputs": [
+    {
+     "key": "observable",
+     "label": "Observable",
+     "type": "text",
+     "required": true,
+     "primary": true,
+     "placeholder": "domain, IP, hash, or email"
+    }
+   ]
   },
   {
    "repo": "yeti-platform/yeti",
@@ -539,7 +1760,18 @@
    "license": "Apache-2.0",
    "install": "Use yeti-docker",
    "usage": "Web UI",
-   "archived": false
+   "archived": false,
+   "description": "A web platform that organizes indicators and attacker techniques. You search an observable and get the related intelligence stored there.",
+   "inputs": [
+    {
+     "key": "observable",
+     "label": "Observable",
+     "type": "text",
+     "required": true,
+     "primary": true,
+     "placeholder": "domain, IP, hash, or email"
+    }
+   ]
   },
   {
    "repo": "smicallef/spiderfoot",
@@ -551,7 +1783,49 @@
    "license": "MIT",
    "install": "git clone https://github.com/smicallef/spiderfoot && pip3 install -r requirements.txt",
    "usage": "python3 sf.py -l 127.0.0.1:5001",
-   "archived": false
+   "archived": false,
+   "description": "Runs OSINT modules against one target and correlates what they find. You get the combined scan results in the web UI or as tab, CSV, or JSON.",
+   "inputs": [
+    {
+     "key": "target",
+     "label": "Target",
+     "type": "text",
+     "required": true,
+     "primary": true,
+     "placeholder": "domain, IP, email, or username",
+     "flag": "-s"
+    },
+    {
+     "key": "modules",
+     "label": "Modules",
+     "type": "text",
+     "placeholder": "sfp_dnsresolve, sfp_whois",
+     "flag": "-m"
+    },
+    {
+     "key": "use_case",
+     "label": "Use case",
+     "type": "select",
+     "flag": "-u",
+     "options": [
+      "passive",
+      "footprint",
+      "investigate",
+      "all"
+     ]
+    },
+    {
+     "key": "output",
+     "label": "Output",
+     "type": "select",
+     "flag": "-o",
+     "options": [
+      "tab",
+      "csv",
+      "json"
+     ]
+    }
+   ]
   },
   {
    "repo": "lanmaster53/recon-ng",
@@ -563,7 +1837,24 @@
    "license": "GPL-3.0",
    "install": "git clone https://github.com/lanmaster53/recon-ng && pip install -r REQUIREMENTS",
    "usage": "./recon-ng",
-   "archived": false
+   "archived": false,
+   "description": "A modular recon console. You choose a module and a source, usually a domain or company, and get that module's results.",
+   "inputs": [
+    {
+     "key": "source",
+     "label": "Source",
+     "type": "text",
+     "required": true,
+     "primary": true,
+     "placeholder": "example.com"
+    },
+    {
+     "key": "module",
+     "label": "Module",
+     "type": "text",
+     "placeholder": "recon/domains-hosts/hackertarget"
+    }
+   ]
   },
   {
    "repo": "s0md3v/Photon",
@@ -575,7 +1866,55 @@
    "license": "GPL-3.0",
    "install": "git clone https://github.com/s0md3v/Photon && pip install -r requirements.txt",
    "usage": "python3 photon.py -u https://example.com",
-   "archived": false
+   "archived": false,
+   "description": "Crawls a website and extracts URLs, files, and related data. You get that crawl output, optionally including archived URLs and DNS names.",
+   "inputs": [
+    {
+     "key": "url",
+     "label": "URL",
+     "type": "url",
+     "required": true,
+     "primary": true,
+     "placeholder": "https://example.com",
+     "flag": "-u"
+    },
+    {
+     "key": "level",
+     "label": "Crawl depth",
+     "type": "number",
+     "placeholder": "2",
+     "flag": "-l"
+    },
+    {
+     "key": "threads",
+     "label": "Threads",
+     "type": "number",
+     "placeholder": "2",
+     "flag": "-t"
+    },
+    {
+     "key": "export",
+     "label": "Export format",
+     "type": "select",
+     "flag": "-e",
+     "options": [
+      "csv",
+      "json"
+     ]
+    },
+    {
+     "key": "wayback",
+     "label": "Seed from Wayback",
+     "type": "bool",
+     "flag": "--wayback"
+    },
+    {
+     "key": "dns",
+     "label": "DNS and subdomains",
+     "type": "bool",
+     "flag": "--dns"
+    }
+   ]
   },
   {
    "repo": "j3ssie/osmedeus",
@@ -587,7 +1926,33 @@
    "license": "MIT",
    "install": "See install script in README",
    "usage": "osmedeus scan -t example.com",
-   "archived": false
+   "archived": false,
+   "description": "Runs a recon workflow against a target. You get the assets and findings that workflow collects.",
+   "inputs": [
+    {
+     "key": "target",
+     "label": "Target",
+     "type": "text",
+     "required": true,
+     "primary": true,
+     "placeholder": "example.com",
+     "flag": "-t"
+    },
+    {
+     "key": "flow",
+     "label": "Flow",
+     "type": "text",
+     "placeholder": "general",
+     "flag": "-f"
+    },
+    {
+     "key": "module",
+     "label": "Module",
+     "type": "text",
+     "placeholder": "recon",
+     "flag": "-m"
+    }
+   ]
   },
   {
    "repo": "six2dez/reconftw",
@@ -599,7 +1964,32 @@
    "license": "MIT",
    "install": "git clone https://github.com/six2dez/reconftw && ./install.sh",
    "usage": "./reconftw.sh -d example.com -r",
-   "archived": false
+   "archived": false,
+   "description": "Runs a recon pipeline on a domain. You get subdomains, live web hosts, and the OSINT or recon output for the mode you pick.",
+   "inputs": [
+    {
+     "key": "domain",
+     "label": "Domain",
+     "type": "domain",
+     "required": true,
+     "primary": true,
+     "placeholder": "example.com",
+     "flag": "-d"
+    },
+    {
+     "key": "mode",
+     "label": "Mode",
+     "type": "select",
+     "options": [
+      "recon",
+      "passive",
+      "subdomains",
+      "osint",
+      "all"
+     ],
+     "help": "recon is -r, passive is -p, subdomains is -s, osint is -n, all is -a."
+    }
+   ]
   },
   {
    "repo": "yogeshojha/rengine",
@@ -611,7 +2001,18 @@
    "license": "GPL-3.0",
    "install": "git clone https://github.com/yogeshojha/rengine && sudo ./install.sh",
    "usage": "Web UI",
-   "archived": false
+   "archived": false,
+   "description": "A web recon suite. You add a domain and start a scan, and get subdomains, endpoints, screenshots, and the rest of the configured pipeline.",
+   "inputs": [
+    {
+     "key": "domain",
+     "label": "Domain",
+     "type": "domain",
+     "required": true,
+     "primary": true,
+     "placeholder": "example.com"
+    }
+   ]
   },
   {
    "repo": "twelvesec/gasmask",
@@ -623,7 +2024,34 @@
    "license": "GPL-3.0",
    "install": "git clone https://github.com/twelvesec/gasmask",
    "usage": "python3 gasmask.py -d example.com -i basic",
-   "archived": false
+   "archived": false,
+   "description": "Gathers public information for a domain in the mode you choose, such as basic, DNS, or whois. You get that module's results.",
+   "inputs": [
+    {
+     "key": "domain",
+     "label": "Domain",
+     "type": "domain",
+     "required": true,
+     "primary": true,
+     "placeholder": "example.com",
+     "flag": "-d"
+    },
+    {
+     "key": "mode",
+     "label": "Mode",
+     "type": "text",
+     "placeholder": "basic",
+     "flag": "-i",
+     "help": "Examples: basic, whois, dns, revdns, crt."
+    },
+    {
+     "key": "limit",
+     "label": "Limit",
+     "type": "number",
+     "placeholder": "10",
+     "flag": "-l"
+    }
+   ]
   },
   {
    "repo": "jivoi/awesome-osint",
@@ -631,11 +2059,13 @@
    "purpose": "The canonical awesome list of OSINT tools",
    "stars": 30700,
    "updated": "2026-10-31",
-   "language": "\u2014",
+   "language": "—",
    "license": "NOASSERTION",
-   "install": "\u2014",
+   "install": "—",
    "usage": "Browse README",
-   "archived": false
+   "archived": false,
+   "description": "A curated reading list of OSINT links, grouped by topic. You browse the list; it does not run a scan.",
+   "inputs": []
   },
   {
    "repo": "cipher387/osint_stuff_tool_collection",
@@ -643,11 +2073,13 @@
    "purpose": "1000+ OSINT tools and resources by category",
    "stars": 9057,
    "updated": "2026-11-03",
-   "language": "\u2014",
+   "language": "—",
    "license": "GPL-3.0",
-   "install": "\u2014",
+   "install": "—",
    "usage": "Browse README",
-   "archived": false
+   "archived": false,
+   "description": "A categorized catalog of OSINT tools and resources. You browse the collection; it does not run a scan.",
+   "inputs": []
   },
   {
    "repo": "lockfale/OSINT-Framework",
@@ -657,9 +2089,11 @@
    "updated": "2026-10-31",
    "language": "JavaScript",
    "license": "MIT",
-   "install": "\u2014",
+   "install": "—",
    "usage": "Open osintframework.com",
-   "archived": false
+   "archived": false,
+   "description": "A clickable tree of OSINT resources by the kind of information you already have. You follow a link; it does not run a scan.",
+   "inputs": []
   }
  ]
 }
